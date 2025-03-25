@@ -1,69 +1,119 @@
 package edu.kis.vh.nursery.list;
 
+/*
+ * Klasa IntLinkedList to implementacja listy jednokierunkowej
+ * przechowujacej wartosci liczbowe typu stala (Integer).
+ * Zawiera w sobie klase wewnetrzna Node oraz metody sluzace do
+ * dodawania nowej wartosci, usuwania ostatnio dodanej wartosci, 
+ * sprawdzania stanu listy i przechowywanych w niej liczb.
+ */
 public class IntLinkedList {
 
+    /*
+     * Klasa Node to klasa wewnetrzna IntLinkedList.
+     * Przechowuje wartosc liczby oraz referencje do poprzedniego i nastepnego wierzcholka.
+     */
 	private class Node {
 
-	    private final int value;
-	    private Node prev;
-		private Node next;
+	    private final int value; // Przechowywana liczba
+	    private Node prev; // Referencja do poprzedniego wierzcholka
+	    private Node next; // Referencja do nastepnego wierzcholka
 
+	    /*
+	     * Konstruktor klasy Node.
+	     * Inicjalizuje wartosc wierzcholka na podana liczbe.
+	     */
 	    public Node(int i) {
 	        value = i;
 	    }
 
-		public int getValue() {
-			return value;
-		}
+	    /*
+	     * Zwraca wartosc przechowywana w wezle.
+	     */
+	    public int getValue() {
+	        return value;
+	    }
 
-		public Node getPrev() {
-			return prev;
-		}
+	    /*
+	     * Zwraca referencje do poprzedniego wierzcholka.
+	     */
+	    public Node getPrev() {
+	        return prev;
+	    }
 
-		public void setPrev(Node prev) {
-			this.prev = prev;
-		}
+	    /*
+	     * Ustawia referencje do poprzedniego wierzcholka.
+	     */
+	    public void setPrev(Node prev) {
+	        this.prev = prev;
+	    }
 
-		public Node getNext() {
-			return next;
-		}
+	    /*
+	     * Zwraca referencje do nastepnego wierzcholka.
+	     */
+	    public Node getNext() {
+	        return next;
+	    }
 
-		public void setNext(Node next) {
-			this.next = next;
-		}
+	    /*
+	     * Ustawia referencje do nastepnego wierzcholka.
+	     */
+	    public void setNext(Node next) {
+	        this.next = next;
+	    }
 
 	}
-	
-    private Node last;
-    public int i;
 
+    private Node last; // Ostatnio dodany wierzcholek
+
+    /*
+     * Dodaje nowa wartosc na koniec listy.
+     * Tworzy nowy wierzcholek i ustawia go jako ostatni element.
+     */
     public void push(int value) {
-        if (last == null)
+        if (last == null) {
             last = new Node(value);
-        else {
+        } else {
             last.setNext(new Node(value));
             last.getNext().setPrev(last);
             last = last.getNext();
         }
     }
 
+    /*
+     * Sprawdza, czy lista jest pusta.
+     * Zwraca true, jezeli lista nie zawiera elementow.
+     */
     public boolean isEmpty() {
         return last == null;
     }
 
+    /*
+     * Zawsze zwraca false, poniewaz lista nie ma ograniczen pojemnosciowych.
+     */
     public boolean isFull() {
         return false;
     }
 
+    /*
+     * Zwraca wartosc ostatniego elementu listy.
+     * Jeżeli lista jest pusta, zwraca -1.
+     */
     public int top() {
-        if (isEmpty())
+        if (isEmpty()) {
             return -1;
+        }
         return last.getValue();
     }
 
+    /*
+     * Usuwa i zwraca wartosc ostatniego elementu listy.
+     * Jeżeli lista jest pusta, zwraca -1.
+     */
     public int pop() {
-        if (isEmpty())
+        if (isEmpty()) {
             return -1;
+        }
         int ret = last.getValue();
         last = last.getPrev();
         return ret;
