@@ -91,7 +91,7 @@ public class IntLinkedList {
     /*
      * Zawsze zwraca false, poniewaz lista nie ma ograniczen pojemnosciowych.
      */
-    public boolean isFull() {
+    public boolean isFull() {	// TODO: do usuniecia, lista nie ma ograniczonego rozmiaru
         return false;
     }
 
